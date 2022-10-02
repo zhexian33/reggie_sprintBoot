@@ -27,16 +27,27 @@ public class LoginCheckFilter implements Filter {
         String[] urls={ "/backend/**",
                         "/front/**",
                         "/employee/login",
-                        "/employee/logout"};
+                        "/employee/logout",
+                        "/user/sendMsg",
+                        "/user/login"
+        };
+
         boolean check = check(urls,requestURI);
 
         if(check){
             filterChain.doFilter(request,response);
             return;
         }
-        if(request.getSession().getAttribute("employee")!=null){
+        if(request.getSession().getAttribute("employee")!=null){//员工
             Long empId = (Long) request.getSession().getAttribute("employee");
             BaseContext.setCurrentId(empId);
+
+            filterChain.doFilter(request,response);
+            return;
+        }
+        if(request.getSession().getAttribute("user")!=null){//用户
+            Long userId = (Long) request.getSession().getAttribute("user");
+            BaseContext.setCurrentId(userId);
 
             filterChain.doFilter(request,response);
             return;

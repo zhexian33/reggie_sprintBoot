@@ -33,8 +33,6 @@ public class EmployeeController {
         wrapper.eq(Employee::getUsername,employee.getUsername());
 
         Employee emp = employeeService.getOne(wrapper);
-
-        System.out.println(emp);
         if(emp==null){
             return R.error("登录失败");
         }
@@ -55,7 +53,6 @@ public class EmployeeController {
         request.getSession().removeAttribute("employee");
         return R.success("退出成功");
     }
-
     @PostMapping
     public R<String> save(HttpServletRequest request,@RequestBody Employee employee){
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
