@@ -16,5 +16,3 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: assign_id
-reggie:
-  path: D:\java\code\project\瑞吉外卖\reggie_take_out\src\main\resources\backend\images\dish\
